@@ -1,0 +1,47 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: RewardRouter
+    network: bsc
+    source:
+      address: "0xf49DebEF7159F55507e669a5062A92E586C39f14"
+      abi: RewardRouter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BuyEUSD
+        - Claim
+        - ClaimESBTEUSD
+        - OwnershipTransferred
+        - SellEUSD
+        - StakeElp
+        - UnstakeElp
+        - UserStakeElp
+        - UserUnstakeElp
+      abis:
+        - name: RewardRouter
+          file: ./abis/RewardRouter.json
+      eventHandlers:
+        - event: BuyEUSD(address,address,uint256,uint256)
+          handler: handleBuyEUSD
+        - event: Claim(address,uint256)
+          handler: handleClaim
+        - event: ClaimESBTEUSD(address,uint256)
+          handler: handleClaimESBTEUSD
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: SellEUSD(address,address,uint256,uint256)
+          handler: handleSellEUSD
+        - event: StakeElp(address,uint256)
+          handler: handleStakeElp
+        - event: UnstakeElp(address,uint256)
+          handler: handleUnstakeElp
+        - event: UserStakeElp(address,uint256)
+          handler: handleUserStakeElp
+        - event: UserUnstakeElp(address,uint256)
+          handler: handleUserUnstakeElp
+      file: ./src/reward-router.ts
