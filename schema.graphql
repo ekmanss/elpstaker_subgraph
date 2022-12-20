@@ -4,3 +4,9 @@ type ExampleEntity @entity {
   account: Bytes! # address
   token: Bytes! # address
 }
+
+type Account @entity {
+  id: ID!
+  address: String!
+  totalStaked: String!
+}

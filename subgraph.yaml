@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
@@ -8,40 +8,44 @@ dataSources:
     source:
       address: "0xf49DebEF7159F55507e669a5062A92E586C39f14"
       abi: RewardRouter
+      startBlock: 23721450
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - BuyEUSD
-        - Claim
-        - ClaimESBTEUSD
-        - OwnershipTransferred
-        - SellEUSD
-        - StakeElp
-        - UnstakeElp
         - UserStakeElp
         - UserUnstakeElp
       abis:
         - name: RewardRouter
           file: ./abis/RewardRouter.json
       eventHandlers:
-        - event: BuyEUSD(address,address,uint256,uint256)
-          handler: handleBuyEUSD
-        - event: Claim(address,uint256)
-          handler: handleClaim
-        - event: ClaimESBTEUSD(address,uint256)
-          handler: handleClaimESBTEUSD
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: SellEUSD(address,address,uint256,uint256)
-          handler: handleSellEUSD
-        - event: StakeElp(address,uint256)
-          handler: handleStakeElp
-        - event: UnstakeElp(address,uint256)
-          handler: handleUnstakeElp
         - event: UserStakeElp(address,uint256)
           handler: handleUserStakeElp
         - event: UserUnstakeElp(address,uint256)
           handler: handleUserUnstakeElp
       file: ./src/reward-router.ts
+
+  - kind: ethereum
+    name: RewardRouter2
+    network: bsc
+    source:
+      address: "0x2108397905f6d3a9b277c545948c6d6e1ca22d06"
+      abi: RewardRouter
+      startBlock: 23937910
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - UserStakeElp
+        - UserUnstakeElp
+      abis:
+        - name: RewardRouter
+          file: ./abis/RewardRouter.json
+      eventHandlers:
+        - event: UserStakeElp(address,uint256)
+          handler: handleUserStakeElp
+        - event: UserUnstakeElp(address,uint256)
+          handler: handleUserUnstakeElp
+      file: ./src/reward-router2.ts
