@@ -4,7 +4,7 @@ import {
     UserStakeElp,
     UserUnstakeElp
 } from "../generated/RewardRouter/RewardRouter"
-import {ExampleEntity, Account} from "../generated/schema"
+import {Account} from "../generated/schema"
 
 export function handleUserStakeElp(event: UserStakeElp): void {
 
@@ -13,6 +13,8 @@ export function handleUserStakeElp(event: UserStakeElp): void {
         account = new Account(event.params.account.toHexString())
         account.address = event.params.account.toHexString()
         account.totalStaked = event.params.amount.toString()
+        account.elp1Staked = '0'
+        account.elp2Staked = '0'
         account.save()
     } else {
         account.totalStaked = BigInt.fromString(account.totalStaked).plus(event.params.amount).toString()
@@ -28,6 +30,8 @@ export function handleUserUnstakeElp(event: UserUnstakeElp): void {
         account = new Account(event.params.account.toHexString())
         account.address = event.params.account.toHexString()
         account.totalStaked = event.params.amount.toString()
+        account.elp1Staked = '0'
+        account.elp2Staked = '0'
         account.save()
     } else {
         account.totalStaked = BigInt.fromString(account.totalStaked).minus(event.params.amount).toString()

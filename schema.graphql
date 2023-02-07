@@ -1,12 +1,7 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  account: Bytes! # address
-  token: Bytes! # address
-}
-
 type Account @entity {
-  id: ID!
-  address: String!
-  totalStaked: String!
+    id: ID!
+    address: String!
+    totalStaked: String!
+    elp1Staked: String!
+    elp2Staked: String!
 }

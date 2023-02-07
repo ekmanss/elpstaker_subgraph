@@ -49,3 +49,45 @@ dataSources:
         - event: UserUnstakeElp(address,uint256)
           handler: handleUserUnstakeElp
       file: ./src/reward-router2.ts
+
+  - kind: ethereum
+    name: TokenElp1
+    network: bsc
+    source:
+      address: "0x28b31aB12A285648505568897D55778174BEDa1E"
+      abi: Elp
+      startBlock: 23721540
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: Elp
+          file: ./abis/Elp.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: Elp1Transfer
+      file: ./src/ElpToken.ts
+
+  - kind: ethereum
+    name: TokenElp2
+    network: bsc
+    source:
+      address: "0x1C5AFF95D1C701284E595A8bE675Cf6d474C0069"
+      abi: Elp
+      startBlock: 25202954
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: Elp
+          file: ./abis/Elp.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: Elp2Transfer
+      file: ./src/ElpToken.ts
